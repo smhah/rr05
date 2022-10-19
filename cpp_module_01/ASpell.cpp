@@ -1,34 +1,29 @@
 #include "ASpell.hpp"
 
-ASpell::ASpell(std::string const & name, std::string const & effect) : _name(name), _effect(effect)
+ASpell::ASpell() {}
+
+ASpell::ASpell(std::string const &name, std::string const &effects)
 {
-    std::cout<<name<<": This looks like another boring Spelly day."<<std::endl;
+    this->name = name;
+    this->effects = effects;
 }
 
+ASpell::ASpell(ASpell const &other) { *this = other;}
 
-ASpell::~ASpell()
+ASpell &ASpell::operator=(ASpell const &other)
 {
-    std::cout<<_name<<": My job Spelly here is done!"<<std::endl;
+    this->name = other.name;
+    this->effects = other.effects;
+    return (*this);
 }
 
+ASpell::~ASpell() {}
 
-std::string const & ASpell::getName(void) const
+std::string const &ASpell::getName() const { return (this->name);}
+
+std::string const &ASpell::getEffects() const { return (this->effects);}
+
+void ASpell::launch(ATarget const &target) const
 {
-    return _name;
-}
-
-
-std::string const & ASpell::getEffect(void) const
-{
-    return _effect;
-}
-
-void	ASpell::launch(ATarget const & target) const
-{
-    target.getHitBySpell(*this);
-}
-
-ASpell * ASpell::clone() const
-{
-
+    target.getHitBySpell((*this));
 }
